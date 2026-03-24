@@ -1,0 +1,275 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		31BE09459BC84CE3AF41F610 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD414F48730743339606B5FD /* SocialFeedView.swift */; };
+		8542FBFE4E6440FD9CDE08C9 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD14AF8BDC4B47B5E2244D /* ChatListView.swift */; };
+		8E417588AAB5448B9F51F462 /* EngageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10CD27642704B19BAA1D2C4 /* EngageApp.swift */; };
+		A1BC8A069B1D45F5B6C5FCB2 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43206F50348447E787F85EFC /* CameraService.swift */; };
+		AC0F3C6535664BA68DD7A50A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1083441C9F1644898D91D154 /* MainTabView.swift */; };
+		CB25F2DE6F444F6BA9229E56 /* AISummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2048101ECC4AE0ADF461AE /* AISummaryService.swift */; };
+		D61C9A36A03A41AA8F756643 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9FC00C2CD433C83B44713 /* HealthKitService.swift */; };
+		DE83C62CFE804773AE84CD60 /* EngageTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2126C79B241ADBE828637 /* EngageTabBar.swift */; };
+		E7E900000FB8488AA43C3667 /* EngageTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE939823E584422AB9FCA80B /* EngageTheme.swift */; };
+		EECA9E2286D24159BCD4BA84 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A76E65022408FBF37A07E /* ExploreView.swift */; };
+		FAC6C1D5F03B40D2A25DFFD3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919D6329B9D4463A19A1848 /* ProfileView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1083441C9F1644898D91D154 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabView.swift; path = Engage/Core/UIComponents/MainTabView.swift; sourceTree = "<group>"; };
+		3FAD14AF8BDC4B47B5E2244D /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatListView.swift; path = Engage/Features/Chat/ChatListView.swift; sourceTree = "<group>"; };
+		40E2126C79B241ADBE828637 /* EngageTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EngageTabBar.swift; path = Engage/Core/UIComponents/EngageTabBar.swift; sourceTree = "<group>"; };
+		43206F50348447E787F85EFC /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraService.swift; path = Engage/Core/Services/CameraService.swift; sourceTree = "<group>"; };
+		978A76E65022408FBF37A07E /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExploreView.swift; path = Engage/Features/Map/ExploreView.swift; sourceTree = "<group>"; };
+		9F2048101ECC4AE0ADF461AE /* AISummaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AISummaryService.swift; path = Engage/Core/Services/AISummaryService.swift; sourceTree = "<group>"; };
+		AE939823E584422AB9FCA80B /* EngageTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EngageTheme.swift; path = Engage/Core/DesignSystem/EngageTheme.swift; sourceTree = "<group>"; };
+		B1E9FC00C2CD433C83B44713 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HealthKitService.swift; path = Engage/Core/Services/HealthKitService.swift; sourceTree = "<group>"; };
+		C10CD27642704B19BAA1D2C4 /* EngageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EngageApp.swift; path = Engage/EngageApp.swift; sourceTree = "<group>"; };
+		C5C67ECAD41E4202983B1F5E /* Engage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Engage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD414F48730743339606B5FD /* SocialFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocialFeedView.swift; path = Engage/Features/Social/SocialFeedView.swift; sourceTree = "<group>"; };
+		F919D6329B9D4463A19A1848 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = Engage/Features/Profile/ProfileView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		48FBC818E08F4EEFAB5A3338 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		500523ECFF534800A51391AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C5C67ECAD41E4202983B1F5E /* Engage.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAB3840F9E5E40BA97B92CEE = {
+			isa = PBXGroup;
+			children = (
+				F34DF08A3CAD43F4B3B397CD /* Engage */,
+				500523ECFF534800A51391AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F34DF08A3CAD43F4B3B397CD /* Engage */ = {
+			isa = PBXGroup;
+			children = (
+				C10CD27642704B19BAA1D2C4 /* EngageApp.swift */,
+				AE939823E584422AB9FCA80B /* EngageTheme.swift */,
+				40E2126C79B241ADBE828637 /* EngageTabBar.swift */,
+				1083441C9F1644898D91D154 /* MainTabView.swift */,
+				9F2048101ECC4AE0ADF461AE /* AISummaryService.swift */,
+				43206F50348447E787F85EFC /* CameraService.swift */,
+				B1E9FC00C2CD433C83B44713 /* HealthKitService.swift */,
+				3FAD14AF8BDC4B47B5E2244D /* ChatListView.swift */,
+				CD414F48730743339606B5FD /* SocialFeedView.swift */,
+				978A76E65022408FBF37A07E /* ExploreView.swift */,
+				F919D6329B9D4463A19A1848 /* ProfileView.swift */,
+			);
+			name = Engage;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AD5D4596EBF040AAB335BB0B /* Engage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ECCF868209E4418889B2EB0 /* Build configuration list for PBXNativeTarget "Engage" */;
+			buildPhases = (
+				49197A6B632A47B995EB16AD /* Sources */,
+				48FBC818E08F4EEFAB5A3338 /* Frameworks */,
+				71F159F70346454388047DF9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Engage;
+			productName = Engage;
+			productReference = C5C67ECAD41E4202983B1F5E /* Engage.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4D9BE346D7DC41AD951324BF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 4AD04553A990479F8A6520CA /* Build configuration list for PBXProject "Engage" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CAB3840F9E5E40BA97B92CEE;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AD5D4596EBF040AAB335BB0B /* Engage */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71F159F70346454388047DF9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49197A6B632A47B995EB16AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E417588AAB5448B9F51F462 /* EngageApp.swift in Sources */,
+				E7E900000FB8488AA43C3667 /* EngageTheme.swift in Sources */,
+				DE83C62CFE804773AE84CD60 /* EngageTabBar.swift in Sources */,
+				AC0F3C6535664BA68DD7A50A /* MainTabView.swift in Sources */,
+				CB25F2DE6F444F6BA9229E56 /* AISummaryService.swift in Sources */,
+				A1BC8A069B1D45F5B6C5FCB2 /* CameraService.swift in Sources */,
+				D61C9A36A03A41AA8F756643 /* HealthKitService.swift in Sources */,
+				8542FBFE4E6440FD9CDE08C9 /* ChatListView.swift in Sources */,
+				31BE09459BC84CE3AF41F610 /* SocialFeedView.swift in Sources */,
+				EECA9E2286D24159BCD4BA84 /* ExploreView.swift in Sources */,
+				FAC6C1D5F03B40D2A25DFFD3 /* ProfileView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		28748FA9617A4931AF0E7A35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = GL2ZZV53GJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Engage uses the camera to capture Instant Life moments.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Engage reads health data to calculate your Vitality score.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.engage.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		34E271A7C2D444B1AACAABB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = GL2ZZV53GJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Engage uses the camera to capture Instant Life moments.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Engage reads health data to calculate your Vitality score.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LE_SWIFT_VERSION = 6.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.engage.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F565FD9E72C6461C9EB429A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		F6A3E64246D546DBA894429B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2ECCF868209E4418889B2EB0 /* Build configuration list for PBXNativeTarget "Engage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34E271A7C2D444B1AACAABB7 /* Debug */,
+				28748FA9617A4931AF0E7A35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AD04553A990479F8A6520CA /* Build configuration list for PBXProject "Engage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F565FD9E72C6461C9EB429A5 /* Debug */,
+				F6A3E64246D546DBA894429B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4D9BE346D7DC41AD951324BF /* Project object */;
+}

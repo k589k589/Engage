@@ -1,0 +1,33 @@
+name: Engage
+options:
+  bundleIdPrefix: com.engage
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.0"
+
+targets:
+  Engage:
+    type: application
+    platform: iOS
+    deploymentTarget: "18.0"
+    sources:
+      - path: Engage
+    info:
+      path: Engage/Info.plist
+      properties:
+        CFBundleDisplayName: Engage
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen:
+          UIColorName: ""
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSCameraUsageDescription: "Engage uses the camera to capture Instant Life moments."
+        NSHealthShareUsageDescription: "Engage reads health data to calculate your Vitality score."
+        NSHealthUpdateUsageDescription: "Engage updates health data for your wellness journey."
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        DEVELOPMENT_TEAM: ""
+        PRODUCT_BUNDLE_IDENTIFIER: com.engage.app
+        SWIFT_STRICT_CONCURRENCY: complete
