@@ -47,18 +47,14 @@ struct ProfileView: View {
 
             // Avatar
             Circle()
-                .fill(
-                    LinearGradient(
-                        colors: [Color(hex: 0xF39C12), Color(hex: 0xD35400)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .fill(EngageTheme.Colors.orangeGradient)
                 .frame(width: 100, height: 100)
+                .shadow(color: EngageTheme.Colors.terracotta.opacity(0.3), radius: 15, y: 8)
                 .overlay {
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 40))
+                    Text("LC")
+                        .font(.system(size: 38, weight: .bold, design: .rounded))
                         .foregroundStyle(.white)
+                        .tracking(2)
                 }
 
             Text("AESTHETIC DATA CENTER")
@@ -87,7 +83,6 @@ struct ProfileView: View {
     private var statsSection: some View {
         VStack(spacing: EngageTheme.Spacing.md) {
             statRow(
-                icon: "⏳",
                 label: "LIFE PROGRESS",
                 date: "EST. 2024",
                 value: "35%",
@@ -95,7 +90,6 @@ struct ProfileView: View {
             )
 
             statRow(
-                icon: "⚡️",
                 label: "VITALITY",
                 date: nil,
                 value: "82%",
@@ -103,7 +97,6 @@ struct ProfileView: View {
             )
 
             statRow(
-                icon: "🧠",
                 label: "CLARITY",
                 date: nil,
                 value: "94%",
@@ -113,20 +106,18 @@ struct ProfileView: View {
     }
 
     private func statRow(
-        icon: String,
         label: String,
         date: String?,
         value: String,
         description: String?
     ) -> some View {
         VStack(spacing: EngageTheme.Spacing.sm) {
-            HStack {
-                Text(icon)
+            HStack(alignment: .bottom) {
                 Text(label)
                     .font(.caption)
                     .fontWeight(.bold)
                     .foregroundStyle(EngageTheme.Colors.secondaryText)
-                    .tracking(1)
+                    .tracking(2)
 
                 Spacer()
 
@@ -261,10 +252,12 @@ struct ProfileView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                     .foregroundStyle(EngageTheme.Colors.charcoal)
+                    .tracking(1)
 
-                Text("今日的彩虹風味是 寧靜雲彩 🌈。放鬆身體與心靈的同步共鳴結果不錯，功課這邊可以更完善整理。")
+                Text("今日的彩虹風味是寧靜雲彩。放鬆身體與心靈的同步共鳴結果不錯，功課這邊可以更完善整理。")
                     .font(.subheadline)
                     .foregroundStyle(EngageTheme.Colors.charcoal.opacity(0.8))
+                    .lineSpacing(4)
             }
         }
         .padding(EngageTheme.Spacing.md)
@@ -290,6 +283,7 @@ struct ProfileView: View {
                     Capsule(style: .continuous)
                         .fill(EngageTheme.Colors.orangeGradient)
                 )
+                .shadow(color: EngageTheme.Colors.terracotta.opacity(0.3), radius: 10, y: 4)
         }
         .padding(.horizontal, EngageTheme.Spacing.md)
     }

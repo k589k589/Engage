@@ -39,3 +39,10 @@ Podfile.lock
 __pycache__/
 *.pyc
 *.pyo
+
+# Build logs
+build*.log
+
+# Temp scripts
+add_files.rb
+add_pbx.py

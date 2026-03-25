@@ -7,32 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		225975C43B5848EF8B595618 /* CreateActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BAFBCECC4F471E92EF4B61 /* CreateActivityView.swift */; };
 		31BE09459BC84CE3AF41F610 /* SocialFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD414F48730743339606B5FD /* SocialFeedView.swift */; };
+		58260B7AAE244D4E918DDA89 /* CameraCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3FCE44E14945C2BE17BBC2 /* CameraCaptureView.swift */; };
+		7F8D0FCB0806486592A17AE6 /* StoryRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E13F4AFBDE42F7A591161A /* StoryRingView.swift */; };
+		82968E9B0E9DC2B954E7B291 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632AF6B79D1F7BAE709BFB31 /* LocationManager.swift */; };
+		82A2CFCDA098467EA46A8D85 /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6E72E4DA3A45BA89274C01 /* ActivityDetailView.swift */; };
 		8542FBFE4E6440FD9CDE08C9 /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD14AF8BDC4B47B5E2244D /* ChatListView.swift */; };
 		8E417588AAB5448B9F51F462 /* EngageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10CD27642704B19BAA1D2C4 /* EngageApp.swift */; };
+		999D975727254F8EA898A3AB /* VoiceMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885582866304F359C290AF1 /* VoiceMessageView.swift */; };
+		9E9D418BF8F14D0398B0ADF8 /* CircleFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262FDD4AE00A4734A676EB8F /* CircleFeedView.swift */; };
+		A02C790BD86E4DED96D05531 /* CirclePostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239E907F6F80401B96C3322D /* CirclePostCard.swift */; };
 		A1BC8A069B1D45F5B6C5FCB2 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43206F50348447E787F85EFC /* CameraService.swift */; };
 		AC0F3C6535664BA68DD7A50A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1083441C9F1644898D91D154 /* MainTabView.swift */; };
+		BDDDE17F2E164BDA933DE78E /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79C47859D6547DA8F738C6C /* FilterView.swift */; };
+		BFBF7249DCB748E0ADA00B01 /* ComposePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18560BB75414C3189CC6640 /* ComposePostView.swift */; };
 		CB25F2DE6F444F6BA9229E56 /* AISummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2048101ECC4AE0ADF461AE /* AISummaryService.swift */; };
 		D61C9A36A03A41AA8F756643 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9FC00C2CD433C83B44713 /* HealthKitService.swift */; };
 		DE83C62CFE804773AE84CD60 /* EngageTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2126C79B241ADBE828637 /* EngageTabBar.swift */; };
+		E52CA7D0EDE34E35BECE64F2 /* CircleModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040849E3D34048758FC63228 /* CircleModels.swift */; };
 		E7E900000FB8488AA43C3667 /* EngageTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE939823E584422AB9FCA80B /* EngageTheme.swift */; };
 		EECA9E2286D24159BCD4BA84 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978A76E65022408FBF37A07E /* ExploreView.swift */; };
 		FAC6C1D5F03B40D2A25DFFD3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919D6329B9D4463A19A1848 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040849E3D34048758FC63228 /* CircleModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleModels.swift; path = Engage/Features/Social/CircleModels.swift; sourceTree = "<group>"; };
+		0885582866304F359C290AF1 /* VoiceMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VoiceMessageView.swift; path = Engage/Features/Social/VoiceMessageView.swift; sourceTree = "<group>"; };
+		0A3FCE44E14945C2BE17BBC2 /* CameraCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraCaptureView.swift; path = Engage/Features/Social/CameraCaptureView.swift; sourceTree = "<group>"; };
 		1083441C9F1644898D91D154 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainTabView.swift; path = Engage/Core/UIComponents/MainTabView.swift; sourceTree = "<group>"; };
+		239E907F6F80401B96C3322D /* CirclePostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CirclePostCard.swift; path = Engage/Features/Social/CirclePostCard.swift; sourceTree = "<group>"; };
+		262FDD4AE00A4734A676EB8F /* CircleFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleFeedView.swift; path = Engage/Features/Social/CircleFeedView.swift; sourceTree = "<group>"; };
 		3FAD14AF8BDC4B47B5E2244D /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatListView.swift; path = Engage/Features/Chat/ChatListView.swift; sourceTree = "<group>"; };
 		40E2126C79B241ADBE828637 /* EngageTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EngageTabBar.swift; path = Engage/Core/UIComponents/EngageTabBar.swift; sourceTree = "<group>"; };
 		43206F50348447E787F85EFC /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraService.swift; path = Engage/Core/Services/CameraService.swift; sourceTree = "<group>"; };
+		632AF6B79D1F7BAE709BFB31 /* LocationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Engage/Core/Services/LocationManager.swift; sourceTree = "<group>"; };
 		978A76E65022408FBF37A07E /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExploreView.swift; path = Engage/Features/Map/ExploreView.swift; sourceTree = "<group>"; };
+		9A6E72E4DA3A45BA89274C01 /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityDetailView.swift; path = Engage/Features/Map/ActivityDetailView.swift; sourceTree = "<group>"; };
 		9F2048101ECC4AE0ADF461AE /* AISummaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AISummaryService.swift; path = Engage/Core/Services/AISummaryService.swift; sourceTree = "<group>"; };
+		A18560BB75414C3189CC6640 /* ComposePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComposePostView.swift; path = Engage/Features/Social/ComposePostView.swift; sourceTree = "<group>"; };
+		A79C47859D6547DA8F738C6C /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterView.swift; path = Engage/Features/Map/FilterView.swift; sourceTree = "<group>"; };
 		AE939823E584422AB9FCA80B /* EngageTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EngageTheme.swift; path = Engage/Core/DesignSystem/EngageTheme.swift; sourceTree = "<group>"; };
 		B1E9FC00C2CD433C83B44713 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HealthKitService.swift; path = Engage/Core/Services/HealthKitService.swift; sourceTree = "<group>"; };
 		C10CD27642704B19BAA1D2C4 /* EngageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EngageApp.swift; path = Engage/EngageApp.swift; sourceTree = "<group>"; };
+		C2E13F4AFBDE42F7A591161A /* StoryRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoryRingView.swift; path = Engage/Features/Social/StoryRingView.swift; sourceTree = "<group>"; };
 		C5C67ECAD41E4202983B1F5E /* Engage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Engage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD414F48730743339606B5FD /* SocialFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocialFeedView.swift; path = Engage/Features/Social/SocialFeedView.swift; sourceTree = "<group>"; };
 		F919D6329B9D4463A19A1848 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = Engage/Features/Profile/ProfileView.swift; sourceTree = "<group>"; };
+		F9BAFBCECC4F471E92EF4B61 /* CreateActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateActivityView.swift; path = Engage/Features/Map/CreateActivityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +76,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		653699DC5DFE6F7F4234E052 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				632AF6B79D1F7BAE709BFB31 /* LocationManager.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		9873900713D522ACD474A8FA /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				653699DC5DFE6F7F4234E052 /* Map */,
+			);
+			name = Features;
+			sourceTree = "<group>";
+		};
 		CAB3840F9E5E40BA97B92CEE = {
 			isa = PBXGroup;
 			children = (
@@ -73,9 +111,20 @@
 				43206F50348447E787F85EFC /* CameraService.swift */,
 				B1E9FC00C2CD433C83B44713 /* HealthKitService.swift */,
 				3FAD14AF8BDC4B47B5E2244D /* ChatListView.swift */,
+				040849E3D34048758FC63228 /* CircleModels.swift */,
+				C2E13F4AFBDE42F7A591161A /* StoryRingView.swift */,
+				0A3FCE44E14945C2BE17BBC2 /* CameraCaptureView.swift */,
+				0885582866304F359C290AF1 /* VoiceMessageView.swift */,
+				239E907F6F80401B96C3322D /* CirclePostCard.swift */,
+				262FDD4AE00A4734A676EB8F /* CircleFeedView.swift */,
+				A18560BB75414C3189CC6640 /* ComposePostView.swift */,
 				CD414F48730743339606B5FD /* SocialFeedView.swift */,
+				9A6E72E4DA3A45BA89274C01 /* ActivityDetailView.swift */,
+				F9BAFBCECC4F471E92EF4B61 /* CreateActivityView.swift */,
+				A79C47859D6547DA8F738C6C /* FilterView.swift */,
 				978A76E65022408FBF37A07E /* ExploreView.swift */,
 				F919D6329B9D4463A19A1848 /* ProfileView.swift */,
+				9873900713D522ACD474A8FA /* Features */,
 			);
 			name = Engage;
 			sourceTree = "<group>";
@@ -119,6 +168,7 @@
 				Base,
 			);
 			mainGroup = CAB3840F9E5E40BA97B92CEE;
+			productRefGroup = 500523ECFF534800A51391AC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -150,9 +200,20 @@
 				A1BC8A069B1D45F5B6C5FCB2 /* CameraService.swift in Sources */,
 				D61C9A36A03A41AA8F756643 /* HealthKitService.swift in Sources */,
 				8542FBFE4E6440FD9CDE08C9 /* ChatListView.swift in Sources */,
+				E52CA7D0EDE34E35BECE64F2 /* CircleModels.swift in Sources */,
+				7F8D0FCB0806486592A17AE6 /* StoryRingView.swift in Sources */,
+				58260B7AAE244D4E918DDA89 /* CameraCaptureView.swift in Sources */,
+				999D975727254F8EA898A3AB /* VoiceMessageView.swift in Sources */,
+				A02C790BD86E4DED96D05531 /* CirclePostCard.swift in Sources */,
+				9E9D418BF8F14D0398B0ADF8 /* CircleFeedView.swift in Sources */,
+				BFBF7249DCB748E0ADA00B01 /* ComposePostView.swift in Sources */,
 				31BE09459BC84CE3AF41F610 /* SocialFeedView.swift in Sources */,
+				82A2CFCDA098467EA46A8D85 /* ActivityDetailView.swift in Sources */,
+				225975C43B5848EF8B595618 /* CreateActivityView.swift in Sources */,
+				BDDDE17F2E164BDA933DE78E /* FilterView.swift in Sources */,
 				EECA9E2286D24159BCD4BA84 /* ExploreView.swift in Sources */,
 				FAC6C1D5F03B40D2A25DFFD3 /* ProfileView.swift in Sources */,
+				82968E9B0E9DC2B954E7B291 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

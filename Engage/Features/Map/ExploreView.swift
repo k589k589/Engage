@@ -1,237 +1,192 @@
 import SwiftUI
+import MapKit
 
 /// Discovery Map tab — interactive map with activity markers
 /// and a bottom "Recommended for You" list.
 struct ExploreView: View {
+    @ObservedObject var locationManager = LocationManager.shared
+    
+    // Default context for mock data
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 25.0339, longitude: 121.5644), // Taipei 101 area
+        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+    )
+
+    // State for navigation/modals
+    @State private var searchText = ""
+    @State private var selectedActivity: Activity?
+    @State private var showActivityDetail = false
+
+    // Mock activities
+    let mockActivities = [
+        Activity(id: "m1", name: "Daan Park Run", category: "健康", locationName: "Daan Forest Park", coordinate: CLLocationCoordinate2D(latitude: 25.0326, longitude: 121.5358), joined: 12, maxCapacity: 20, timeString: "Tomorrow 07:00 AM", description: "A healthy morning run starting at Daan Park."),
+        Activity(id: "m2", name: "Tech Meetup", category: "社交", locationName: "Taipei 101", coordinate: CLLocationCoordinate2D(latitude: 25.0339, longitude: 121.5644), joined: 45, maxCapacity: 50, timeString: "Friday 19:00 PM", description: "A great networking event for tech enthusiasts."),
+        Activity(id: "m3", name: "Language Exchange", category: "學習", locationName: "Zhongshan Cafe", coordinate: CLLocationCoordinate2D(latitude: 25.0531, longitude: 121.5204), joined: 8, maxCapacity: 15, timeString: "Saturday 14:00 PM", description: "Practice English and Mandarin.")
+    ]
+    
+    var filteredActivities: [Activity] {
+        if searchText.isEmpty {
+            return mockActivities
+        }
+        return mockActivities.filter { $0.name.localizedCaseInsensitiveContains(searchText) || $0.category.localizedCaseInsensitiveContains(searchText) }
+    }
+
     var body: some View {
-        ZStack {
-            EngageTheme.Colors.backgroundGradient
-                .ignoresSafeArea()
+        ZStack(alignment: .top) {
+            // 1. Full-screen Map
+            Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: filteredActivities) { activity in
+                MapAnnotation(coordinate: activity.coordinate) {
+                    Button {
+                        selectedActivity = activity
+                    } label: {
+                        VStack(spacing: 4) {
+                            Image(systemName: activity.category == "健康" ? "figure.mind.and.body" : "person.2.fill")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding(8)
+                                .background(EngageTheme.Colors.terracotta)
+                                .clipShape(Circle())
+                                .shadow(radius: 4)
+                                .scaleEffect(selectedActivity?.id == activity.id ? 1.2 : 1.0)
+                                .animation(.spring(response: 0.3, dampingFraction: 0.6), value: selectedActivity?.id)
+                            
+                            Text(activity.name)
+                                .font(.caption2)
+                                .fontWeight(.bold)
+                                .foregroundColor(EngageTheme.Colors.charcoal)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 3)
+                                .background(.white.opacity(0.9))
+                                .clipShape(Capsule())
+                                .shadow(radius: 2)
+                        }
+                    }
+                }
+            }
+            .ignoresSafeArea()
+            .onAppear {
+                locationManager.requestLocation()
+            }
+            .onChange(of: locationManager.userLocation?.latitude) { newLat in
+                if let newLoc = locationManager.userLocation {
+                    // Update camera position to user's location
+                    withAnimation {
+                        region = MKCoordinateRegion(
+                            center: newLoc,
+                            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                        )
+                    }
+                }
+            }
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: EngageTheme.Spacing.lg) {
-                    // Header
-                    headerSection
-
+            // 2. Top UI: Header + Search
+            VStack(spacing: EngageTheme.Spacing.md) {
+                // Blur bg for header
+                VStack(spacing: EngageTheme.Spacing.sm) {
+                    // Simple top header
+                    HStack {
+                        Text("Explore")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(EngageTheme.Colors.charcoal)
+                        Spacer()
+                        Button {
+                            // Map settings / filter
+                        } label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .font(.title3)
+                                .foregroundColor(EngageTheme.Colors.charcoal)
+                                .padding(10)
+                                .background(.white)
+                                .clipShape(Circle())
+                                .shadow(color: .black.opacity(0.1), radius: 5, y: 3)
+                        }
+                    }
+                    
                     // Search bar
-                    searchBar
-
-                    // Map placeholder
-                    mapPlaceholder
-
-                    // Recommended section
-                    recommendedSection
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                        TextField("Search for activities or locations...", text: $searchText)
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .shadow(color: .black.opacity(0.05), radius: 8, y: 4)
                 }
-                .padding(.horizontal, EngageTheme.Spacing.md)
-                .padding(.bottom, 100) // space for floating tab bar
+                .padding(.horizontal)
+                .padding(.top, 50) // Safe area
+                .padding(.bottom, 12)
+                .background(
+                    Rectangle()
+                        .fill(.ultraThinMaterial)
+                        .ignoresSafeArea()
+                )
+                
+                Spacer()
             }
         }
-        .navigationBarHidden(true)
-    }
-
-    // MARK: - Header
-
-    private var headerSection: some View {
-        HStack {
-            HStack(spacing: 10) {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .fill(EngageTheme.Colors.terracotta.opacity(0.15))
-                    .frame(width: 36, height: 36)
-                    .overlay {
-                        Image(systemName: "square.fill")
-                            .font(.system(size: 16))
-                            .foregroundStyle(EngageTheme.Colors.terracotta)
-                    }
-
-                Text("Engage")
-                    .font(.title)
+        .sheet(item: $selectedActivity) { activity in
+            // Activity detail bottom sheet
+            VStack(alignment: .leading, spacing: 16) {
+                Text(activity.name)
+                    .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundStyle(EngageTheme.Colors.charcoal)
-            }
-
-            Spacer()
-
-            HStack(spacing: 16) {
-                Button { } label: {
-                    Image(systemName: "magnifyingglass")
-                        .font(.title3)
-                        .foregroundStyle(EngageTheme.Colors.charcoal)
+                    .foregroundColor(EngageTheme.Colors.charcoal)
+                
+                HStack {
+                    Image(systemName: "mappin.and.ellipse")
+                        .foregroundColor(EngageTheme.Colors.terracotta)
+                    Text(activity.locationName)
+                        .font(.subheadline)
+                        .foregroundColor(EngageTheme.Colors.secondaryText)
                 }
-
-                Button { } label: {
-                    Image(systemName: "ellipsis")
-                        .font(.title3)
-                        .foregroundStyle(EngageTheme.Colors.charcoal)
+                
+                HStack {
+                    Image(systemName: "clock")
+                        .foregroundColor(EngageTheme.Colors.terracotta)
+                    Text(activity.timeString)
+                        .font(.subheadline)
+                        .foregroundColor(EngageTheme.Colors.secondaryText)
                 }
-            }
-        }
-        .padding(.top, EngageTheme.Spacing.sm)
-    }
-
-    // MARK: - Search
-
-    private var searchBar: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundStyle(EngageTheme.Colors.secondaryText)
-
-            Text("搜尋附近的探索...")
-                .foregroundStyle(EngageTheme.Colors.secondaryText)
-
-            Spacer()
-        }
-        .padding()
-        .background(
-            EngageTheme.Shapes.cardShape
-                .fill(.white)
-                .shadow(color: .black.opacity(0.04), radius: 8, y: 2)
-        )
-    }
-
-    // MARK: - Map Placeholder
-
-    private var mapPlaceholder: some View {
-        ZStack {
-            // Warm background with decorative blobs
-            RoundedRectangle(cornerRadius: EngageTheme.Shapes.cardRadius, style: .continuous)
-                .fill(EngageTheme.Colors.sand.opacity(0.5))
-                .frame(height: 320)
-                .overlay {
-                    // Decorative circles
-                    GeometryReader { geo in
-                        Circle()
-                            .fill(EngageTheme.Colors.warmBlob)
-                            .frame(width: 120)
-                            .offset(x: geo.size.width * 0.15, y: 40)
-
-                        Circle()
-                            .fill(EngageTheme.Colors.warmBlob)
-                            .frame(width: 80)
-                            .offset(x: geo.size.width * 0.6, y: 180)
-
-                        Circle()
-                            .fill(EngageTheme.Colors.warmBlob)
-                            .frame(width: 100)
-                            .offset(x: geo.size.width * 0.7, y: 60)
-                    }
+                
+                HStack {
+                    Image(systemName: "person.2.fill")
+                        .foregroundColor(EngageTheme.Colors.terracotta)
+                    Text("\(activity.joined)/\(activity.maxCapacity) 參加")
+                        .font(.subheadline)
+                        .foregroundColor(EngageTheme.Colors.secondaryText)
                 }
-
-            // Sample activity markers
-            VStack(spacing: 24) {
-                activityMarker("咖啡聚會", xOffset: -40, yOffset: -20)
-                activityMarker("讀書會", xOffset: 20, yOffset: 30)
-                activityMarker("日落瑜珈提", xOffset: 60, yOffset: -10)
-            }
-        }
-    }
-
-    private func activityMarker(_ title: String, xOffset: CGFloat, yOffset: CGFloat) -> some View {
-        HStack(spacing: 4) {
-            Text(title)
-                .font(.caption)
-                .fontWeight(.semibold)
-                .foregroundStyle(.white)
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
-        .background(
-            Capsule(style: .continuous)
-                .fill(EngageTheme.Colors.terracotta)
-        )
-        .offset(x: xOffset, y: yOffset)
-    }
-
-    // MARK: - Recommended
-
-    private var recommendedSection: some View {
-        VStack(alignment: .leading, spacing: EngageTheme.Spacing.md) {
-            Text("為您推薦")
-                .font(.title3)
-                .fontWeight(.bold)
-                .foregroundStyle(EngageTheme.Colors.charcoal)
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: EngageTheme.Spacing.md) {
-                    activityCard(
-                        category: "社區",
-                        title: "讀書會聚會",
-                        time: "今天 6:00 PM",
-                        description: "每月一次的聚會，討論「創造力的行為」與當地藝術。"
-                    )
-
-                    activityCard(
-                        category: "健康",
-                        title: "日落瑜伽",
-                        time: "明天 5:30 PM",
-                        description: "在公園進行的日落瑜伽練習。"
-                    )
-                }
-            }
-        }
-    }
-
-    private func activityCard(
-        category: String,
-        title: String,
-        time: String,
-        description: String
-    ) -> some View {
-        VStack(alignment: .leading, spacing: EngageTheme.Spacing.sm) {
-            HStack {
-                Text(category)
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(EngageTheme.Colors.terracotta)
-
+                
                 Spacer()
-
-                Text(time)
-                    .font(.caption2)
-                    .foregroundStyle(EngageTheme.Colors.secondaryText)
-            }
-
-            Text(title)
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundStyle(EngageTheme.Colors.charcoal)
-
-            Text(description)
-                .font(.subheadline)
-                .foregroundStyle(EngageTheme.Colors.secondaryText)
-                .lineLimit(2)
-
-            HStack {
-                Text("查看詳情")
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(EngageTheme.Colors.terracotta)
-
-                Spacer()
-
-                HStack(spacing: -6) {
-                    Circle()
-                        .fill(EngageTheme.Colors.terracotta.opacity(0.3))
-                        .frame(width: 24, height: 24)
-                    Circle()
-                        .fill(EngageTheme.Colors.terracotta.opacity(0.5))
-                        .frame(width: 24, height: 24)
+                
+                Button {
+                    // Join action
+                } label: {
+                    Text("Join Activity")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(EngageTheme.Colors.terracotta)
+                        .cornerRadius(12)
                 }
             }
+            .padding()
+            .presentationDetents([.fraction(0.35)])
+            .presentationDragIndicator(.visible)
         }
-        .padding(EngageTheme.Spacing.md)
-        .frame(width: 260)
-        .background(
-            EngageTheme.Shapes.cardShape
-                .fill(.white)
-                .shadow(color: .black.opacity(0.04), radius: 8, y: 2)
-        )
     }
 }
 
-// MARK: - Preview
-
-#Preview("Explore") {
-    NavigationStack {
-        ExploreView()
-    }
+// Temporary Activity Model for Map demo
+struct Activity: Identifiable {
+    let id: String
+    let name: String
+    let category: String
+    let locationName: String
+    let coordinate: CLLocationCoordinate2D
+    let joined: Int
+    let maxCapacity: Int
+    let timeString: String
+    let description: String
 }

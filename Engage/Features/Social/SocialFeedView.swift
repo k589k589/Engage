@@ -1,226 +1,227 @@
 import SwiftUI
 
-/// Social / Instant Circles tab — Live video feed and community dynamics.
+/// Social Circle (社交圈) tab — Camera stories + Group Circle feed with voice posts.
 struct SocialFeedView: View {
+    // MARK: - State
+
+    @State private var selectedCircle: FriendCircle?
+    @State private var isCameraPresented = false
+    @State private var isComposePresented = false
+    @State private var selectedStory: Story?
+    @State private var stories = Story.samples
+    @State private var posts = CirclePost.samples
+    private let circles = FriendCircle.samples
+
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottomTrailing) {
             EngageTheme.Colors.backgroundGradient
                 .ignoresSafeArea()
 
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: EngageTheme.Spacing.lg) {
                     // Header
                     headerSection
 
-                    // Live video card
-                    liveVideoCard
+                    // Story ring
+                    StoryRingView(
+                        stories: stories,
+                        isCameraPresented: $isCameraPresented,
+                        selectedStory: $selectedStory
+                    )
 
-                    // Dynamics
-                    dynamicsSection
+                    // Divider
+                    Rectangle()
+                        .fill(EngageTheme.Colors.charcoal.opacity(0.06))
+                        .frame(height: 6)
+                        .padding(.horizontal, -EngageTheme.Spacing.md)
+
+                    // Circle feed
+                    CircleFeedView(
+                        circles: circles,
+                        posts: posts,
+                        selectedCircle: $selectedCircle,
+                        isComposePresented: $isComposePresented
+                    )
+                    .padding(.horizontal, EngageTheme.Spacing.md)
                 }
-                .padding(.horizontal, EngageTheme.Spacing.md)
-                .padding(.bottom, 100)
+                .padding(.bottom, 120)
             }
+
+            // Compose FAB
+            composeFAB
         }
         .navigationBarHidden(true)
+        .fullScreenCover(isPresented: $isCameraPresented) {
+            CameraCaptureView()
+        }
+        .sheet(isPresented: $isComposePresented) {
+            ComposePostView(circles: circles)
+                .presentationDetents([.large])
+        }
+        .sheet(item: $selectedStory) { story in
+            StoryViewerSheet(story: story) {
+                // Mark as seen
+                if let idx = stories.firstIndex(where: { $0.id == story.id }) {
+                    stories[idx].isSeen = true
+                }
+                selectedStory = nil
+            }
+        }
     }
 
     // MARK: - Header
 
     private var headerSection: some View {
-        VStack(alignment: .leading, spacing: EngageTheme.Spacing.xs) {
-            Text("Instant Life")
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundStyle(EngageTheme.Colors.charcoal)
-
-            HStack {
-                Spacer()
-                Text("LIVE NOW")
-                    .font(.caption)
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("社交圈")
+                    .font(.title)
                     .fontWeight(.bold)
-                    .foregroundStyle(EngageTheme.Colors.terracotta)
+                    .foregroundStyle(EngageTheme.Colors.charcoal)
+
+                Text("你的圈子，你的故事")
+                    .font(.caption)
+                    .foregroundStyle(EngageTheme.Colors.secondaryText)
             }
+
+            Spacer()
+
+            // Notifications bell
+            Button {
+                // Future: notifications
+            } label: {
+                Image(systemName: "bell")
+                    .font(.title3)
+                    .foregroundStyle(EngageTheme.Colors.charcoal.opacity(0.6))
+                    .frame(width: 40, height: 40)
+                    .background(
+                        Circle()
+                            .fill(EngageTheme.Colors.charcoal.opacity(0.06))
+                    )
+            }
+            .buttonStyle(.plain)
         }
+        .padding(.horizontal, EngageTheme.Spacing.md)
     }
 
-    // MARK: - Live Video
+    // MARK: - Compose FAB
 
-    private var liveVideoCard: some View {
-        ZStack(alignment: .bottomLeading) {
-            // Video placeholder
-            RoundedRectangle(cornerRadius: EngageTheme.Shapes.cardRadius, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color(hex: 0xF5E6D3),
-                            Color(hex: 0xE8D5C4),
-                            Color(hex: 0xD4C4B0)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .frame(height: 360)
-                .overlay(alignment: .topLeading) {
-                    // LIVE badge
-                    Text("LIVE")
-                        .font(.caption2)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(
-                            Capsule(style: .continuous)
-                                .fill(.green)
-                        )
-                        .padding(EngageTheme.Spacing.md)
+    private var composeFAB: some View {
+        Button {
+            isComposePresented = true
+        } label: {
+            ZStack {
+                Circle()
+                    .fill(EngageTheme.Colors.terracotta)
+                    .frame(width: 56, height: 56)
+                    .shadow(color: EngageTheme.Colors.terracotta.opacity(0.4), radius: 12, y: 4)
+
+                Image(systemName: "plus")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+            }
+        }
+        .buttonStyle(.plain)
+        .padding(.trailing, EngageTheme.Spacing.lg)
+        .padding(.bottom, 100) // above tab bar
+    }
+}
+
+// MARK: - Story Viewer Sheet
+
+/// Simple fullscreen story viewer.
+struct StoryViewerSheet: View {
+    let story: Story
+    let onDismiss: () -> Void
+    @State private var progress: CGFloat = 0
+
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+
+            // Story content (placeholder gradient)
+            LinearGradient(
+                colors: [story.avatarColor, story.avatarColor.opacity(0.5), .black],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+
+            VStack {
+                // Progress bar
+                GeometryReader { geo in
+                    Capsule()
+                        .fill(.white.opacity(0.3))
+                        .frame(height: 3)
+                        .overlay(alignment: .leading) {
+                            Capsule()
+                                .fill(.white)
+                                .frame(width: geo.size.width * progress, height: 3)
+                        }
                 }
+                .frame(height: 3)
+                .padding(.horizontal, EngageTheme.Spacing.md)
+                .padding(.top, 12)
 
-            // User info overlay
-            VStack(alignment: .leading, spacing: 4) {
-                Text("CURRENTLY AT THE STUDIO")
-                    .font(.caption2)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.white.opacity(0.8))
-                    .tracking(1)
+                // User info
+                HStack(spacing: 10) {
+                    Circle()
+                        .fill(story.avatarColor.opacity(0.3))
+                        .frame(width: 36, height: 36)
+                        .overlay {
+                            Text(story.userInitial)
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+                        }
 
-                HStack {
-                    Text("JULIAN")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(story.userName)
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+
+                        Text("剛剛")
+                            .font(.caption2)
+                            .foregroundStyle(.white.opacity(0.6))
+                    }
 
                     Spacer()
 
-                    HStack(spacing: -8) {
-                        Circle()
-                            .fill(EngageTheme.Colors.charcoal.opacity(0.6))
-                            .frame(width: 32, height: 32)
-                            .overlay {
-                                Image(systemName: "headphones")
-                                    .font(.caption)
-                                    .foregroundStyle(.white)
-                            }
-
-                        Circle()
-                            .fill(EngageTheme.Colors.terracotta.opacity(0.8))
-                            .frame(width: 32, height: 32)
-                            .overlay {
-                                Text("+4")
-                                    .font(.caption2)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.white)
-                            }
+                    Button { onDismiss() } label: {
+                        Image(systemName: "xmark")
+                            .font(.title3)
+                            .foregroundStyle(.white)
                     }
                 }
-            }
-            .padding(EngageTheme.Spacing.md)
-        }
-    }
-
-    // MARK: - Dynamics
-
-    private var dynamicsSection: some View {
-        VStack(alignment: .leading, spacing: EngageTheme.Spacing.md) {
-            Text("Dynamics")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundStyle(EngageTheme.Colors.charcoal)
-
-            dynamicPostCard(
-                name: "LEO CHENG",
-                time: "2 HOURS AGO",
-                location: "DOWNTOWN",
-                text: "晚上有沒有人要打球？新社區運動公園 8 點。🏀",
-                replies: 12,
-                saves: 4
-            )
-
-            dynamicPostCard(
-                name: "MIA LIN",
-                time: "4 HOURS AGO",
-                location: nil,
-                text: "吃飯？中山站附近有好吃的拉麵嗎 🍜 超級的...",
-                replies: 28,
-                saves: 9
-            )
-
-            dynamicPostCard(
-                name: "SARAH H.",
-                time: "6 HOURS AGO",
-                location: nil,
-                text: "今天的天氣也太適合去海邊了吧！🌊 有人要衝一殺北海岸嗎？",
-                replies: 5,
-                saves: 2
-            )
-        }
-    }
-
-    private func dynamicPostCard(
-        name: String,
-        time: String,
-        location: String?,
-        text: String,
-        replies: Int,
-        saves: Int
-    ) -> some View {
-        VStack(alignment: .leading, spacing: EngageTheme.Spacing.sm) {
-            HStack {
-                Circle()
-                    .fill(EngageTheme.Colors.charcoal.opacity(0.15))
-                    .frame(width: 36, height: 36)
-                    .overlay {
-                        Image(systemName: "person.fill")
-                            .font(.caption)
-                            .foregroundStyle(EngageTheme.Colors.charcoal.opacity(0.5))
-                    }
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(name)
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                        .foregroundStyle(EngageTheme.Colors.charcoal)
-
-                    Text(time)
-                        .font(.caption2)
-                        .foregroundStyle(EngageTheme.Colors.secondaryText)
-                }
+                .padding(.horizontal, EngageTheme.Spacing.md)
+                .padding(.top, 8)
 
                 Spacer()
 
-                if let location {
-                    Text(location)
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(EngageTheme.Colors.terracotta)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .background(
-                            Capsule(style: .continuous)
-                                .stroke(EngageTheme.Colors.terracotta, lineWidth: 1)
-                        )
+                // Camera icon indicating this was captured live
+                VStack(spacing: 8) {
+                    Image(systemName: "camera.fill")
+                        .font(.system(size: 40))
+                        .foregroundStyle(.white.opacity(0.3))
+
+                    Text("即時拍攝")
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.4))
                 }
-            }
 
-            Text(text)
-                .font(.subheadline)
-                .foregroundStyle(EngageTheme.Colors.charcoal)
-
-            HStack(spacing: EngageTheme.Spacing.md) {
-                Label("REPLY \(replies)", systemImage: "bubble.left")
-                Label("SAVE \(saves)", systemImage: "bookmark")
+                Spacer()
             }
-            .font(.caption2)
-            .fontWeight(.medium)
-            .foregroundStyle(EngageTheme.Colors.secondaryText)
         }
-        .padding(EngageTheme.Spacing.md)
-        .background(
-            EngageTheme.Shapes.cardShape
-                .fill(.white)
-                .shadow(color: .black.opacity(0.04), radius: 8, y: 2)
-        )
+        .onAppear {
+            withAnimation(.linear(duration: 5)) {
+                progress = 1.0
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                onDismiss()
+            }
+        }
     }
 }
 
